@@ -1,3 +1,4 @@
+import { Messages } from "../helpers/helper.js";
 import Employee from "../model/employeeSchema.js";
 
 export const resolvers = {
@@ -7,14 +8,14 @@ export const resolvers = {
         const employees = await Employee.find({});
         return {
           success: true,
-          message: "Employees fetched successfully",
+          message: Messages.GET_EMPLOYEES,
           employees,
           error: null,
         };
       } catch (error) {
         return {
           success: false,
-          message: "Failed to fetch employees",
+          message: Messages.GET_EMPLOYEES_ERROR,
           error: error.message,
         };
       }
@@ -46,14 +47,14 @@ export const resolvers = {
         });
         return {
           success: true,
-          message: "Employees created successfully",
-          employees:employees,
+          message: Messages.CREATE_EMPLOYEE,
+          employees: employees,
           error: null,
         };
       } catch (error) {
         return {
           success: false,
-          message: "Failed to create employees",
+          message: Messages.CREATE_EMPLOYEE_ERROR,
           error: error.message,
         };
       }
@@ -68,22 +69,22 @@ export const resolvers = {
         if (!updatedEmployee) {
           return {
             success: false,
-            message: "NO employee found",
+            message: Messages.NO_EMPLYEE_FOUND,
             updatedEmployee,
             error: null,
           };
-        };
+        }
 
         return {
           success: true,
-          message: "Employees updated successfully",
-          employees:updatedEmployee,
+          message: Messages.UPDATE_EMPLOYEE,
+          employees: updatedEmployee,
           error: null,
         };
       } catch (error) {
         return {
           success: false,
-          message: "Failed to update employees",
+          message: Messages.UPDATE_EMPLOYEE_ERROR,
           error: error.message,
         };
       }
@@ -94,14 +95,14 @@ export const resolvers = {
         if (!deletedEmployee) throw new Error();
         return {
           success: true,
-          message: "Employees Deleted successfully",
-          employees:deletedEmployee,
+          message: Messages.DELETE_EMPLOYEE,
+          employees: deletedEmployee,
           error: null,
         };
       } catch (error) {
         return {
           success: false,
-          message: "Failed to delete employees",
+          message: Messages.DELETE_EMPLOYEE_ERROR,
           error: error.message,
         };
       }
